@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane id="winnerscreen" prefHeight="780.0" prefWidth="1260" xmlns="http://javafx.com/javafx/8.0.172-ea"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.WinnerPUController">
+    <top>
+        <Label id="congrats" fx:id="congrats" wrapText="true"/>
+    </top>
+    <center>
+        <VBox fx:id="fxleaderboard"/>
+    </center>
+    <right>
+        <ImageView BorderPane.alignment="TOP_RIGHT">
+            <Image url="@/styles/shrek.jpg"/>
+        </ImageView>
+    </right>
+    <bottom>
+        <HBox alignment="CENTER_RIGHT" BorderPane.alignment="BOTTOM_RIGHT">
+            <Button onAction="#playAgain" text="Play Again"/>
+            <Button onAction="#exit" text="That was enough for us"/>
+        </HBox>
+    </bottom>
+    <stylesheets>
+        <URL value="@/styles/Styles.css"/>
+    </stylesheets>
+</BorderPane>

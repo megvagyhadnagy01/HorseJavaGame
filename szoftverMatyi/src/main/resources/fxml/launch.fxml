@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LaunchContr">
+   <children>
+      <Pane prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <Label alignment="CENTER" layoutX="170.0" layoutY="41.0" prefHeight="17.0" prefWidth="281.0" text="Horse Game">
+               <font>
+                  <Font name="Droid Sans Bold" size="24.0" />
+               </font>
+            </Label>
+            <Button layoutX="264.0" layoutY="185.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="94.0" text="Start" textAlignment="CENTER" />
+            <Button layoutX="271.0" layoutY="311.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="80.0" text="Exit" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
