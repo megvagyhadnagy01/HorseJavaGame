@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane id="mainmenu" fx:id="mainmenu" prefHeight="650.0" prefWidth="1620.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainMenuController">
+    <left>
+        <Label id="title" fx:id="title" text="Horse Game" BorderPane.alignment="CENTER_RIGHT" />
+    </left>
+    <center>
+        <VBox alignment="CENTER" BorderPane.alignment="BOTTOM_CENTER">
+            <Button fx:id="startbutton" onAction="#startGame" text="New Game" />
+            <Button fx:id="winnersbutton" onAction="#showWinners" text="Winners" />
+            <Button fx:id="exitbutton" onAction="#exit" text="Exit" />
+        </VBox>
+    </center>
+    <stylesheets>
+        <URL value="@/styles/Styles.css" />
+    </stylesheets>
+
+
+</BorderPane>

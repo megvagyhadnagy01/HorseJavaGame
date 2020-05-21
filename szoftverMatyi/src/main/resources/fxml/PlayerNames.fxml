@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+<BorderPane fx:id="playernames" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.PlayerNController">
+    <center>
+        <VBox alignment="CENTER" BorderPane.alignment="CENTER">
+            <Label text="Blue player name:" BorderPane.alignment="CENTER_LEFT"/>
+            <TextField fx:id="player1" maxWidth="500" promptText="Blue player"/>
+            <Label text="Red player name:" BorderPane.alignment="CENTER_LEFT"/>
+            <TextField fx:id="player2" maxWidth="500" promptText="Red Player"/>
+            <Label id="warning" fx:id="warning"/>
+            <HBox alignment="CENTER">
+                <Button fx:id="submitNames" onAction="#submitNames" text="Submit"/>
+                <Button fx:id="cancel" onAction="#backToMain" text="Cancel"/>
+            </HBox>
+        </VBox>
+    </center>
+    <stylesheets>
+        <URL value="@/styles/Styles.css"/>
+    </stylesheets>
+
+</BorderPane>
