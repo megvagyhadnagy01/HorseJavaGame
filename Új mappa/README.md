@@ -1,4 +1,4 @@
-# rolling-cubes
+# HorseGame
 Example project for Software Engineering class.
 
 &nbsp;
