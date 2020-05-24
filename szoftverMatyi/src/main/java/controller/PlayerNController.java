@@ -1,6 +1,6 @@
 package controller;
 
-import game.Players;
+import game.sate.Player;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,6 +10,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
+
+import static controller.GameController.*;
 
 /**
  * A játék főmenűből való indításakor megjelenő
@@ -53,7 +55,9 @@ public class PlayerNController {
         if (player1.getText().equals("") || player2.getText().equals("")) {
             warning.setText("Type both name!");
         } else {
-            Players.setPlayer(player1.getText(), player2.getText());
+            players.put(PLAYER_1, new Player(player1.getText(), new int[]{-1, -1}));
+            players.put(PLAYER_2, new Player(player2.getText(), new int[]{-1, -1}));
+            GameUtils.currentPlayer = PLAYER_1;
             Scene scene = warning.getScene();
             Parent root = null;
             try {

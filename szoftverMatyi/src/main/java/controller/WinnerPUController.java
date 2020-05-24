@@ -1,7 +1,7 @@
 package controller;
 
 import game.LeaderBoard;
-import game.Players;
+import game.sate.Player;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,6 +12,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
+
+import static controller.GameController.*;
+import static controller.GameController.PLAYER_1;
 
 /**
  * A játék végén felugró ablak kezelője.
@@ -57,7 +60,7 @@ public class WinnerPUController {
         if (winner.equals("TIE")) {
             congrats.setText("Do you know how to play??\n It's a tie.");
         } else {
-            String text = "Congrats " + Players.getPlayer(winner) + ", you won!";
+            String text = "Congrats " + players.get(winner) + ", you won!";
             congrats.setText(text);
         }
     }
@@ -72,6 +75,9 @@ public class WinnerPUController {
         Scene scene = fxleaderboard.getScene();
         Parent root = null;
         try {
+            players.get(PLAYER_1).setCurrentPosition(new int[]{-1, -1});
+            players.get(PLAYER_2).setCurrentPosition(new int[]{-1, -1});
+            GameUtils.currentPlayer = PLAYER_1;
             root = FXMLLoader.load(getClass().getResource("/fxml/Game.fxml"));
         } catch (IOException e) {
             e.printStackTrace();
