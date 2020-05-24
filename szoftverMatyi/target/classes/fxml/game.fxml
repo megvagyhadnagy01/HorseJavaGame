@@ -1,14 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="fxml.Game"
-            prefHeight="400.0" prefWidth="600.0">
+<BorderPane id="game" fx:id="root" prefHeight="676.0" prefWidth="1280"
+            xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.GameController">
+    <left>
+        <VBox spacing="25.0">
+            <Label text="Horse Game" id="playtitle"/>
+            <Button id="backToMain" fx:id="backToMain" onAction="#backToMain" text="Back to Main Menu"/>
+            <Button fx:id="exit" onAction="#exit" text="Exit"/>
+            <Label fx:id="playerList" text="Player List"/>
+            <VBox>
+                <Label id="p1OnList" fx:id="p1Name"/>
+                <Label id="p2OnList" fx:id="p2Name"/>
+            </VBox>
+        </VBox>
+    </left>
+    <top>
+        <Label id="turn" fx:id="playerTurn" prefHeight="56.0" prefWidth="1394.0" textAlignment="RIGHT"
+               BorderPane.alignment="TOP_RIGHT"/>
+    </top>
+    <center>
+        <GridPane id="board" fx:id="board" alignment="CENTER" gridLinesVisible="true" minHeight="500" minWidth="500"
+                  onMouseClicked="#gridClicked" BorderPane.alignment="CENTER">
 
-</AnchorPane>
+        </GridPane>
+    </center>
+    <stylesheets>
+        <URL value="@/styles/Styles.css"/>
+    </stylesheets>
+</BorderPane>

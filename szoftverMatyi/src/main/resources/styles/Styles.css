@@ -1,0 +1,86 @@
+@font-face {
+    /*   src: url("SlimPlay.ttf");*/
+    src: url("UKIJKuU.ttf");
+}
+
+.startbuton.winnerbutton.exitbutton {
+    -fx-background-color: transparent;
+    -fx-min-width: 100;
+    -fx-font-size: 50;
+    -fx-effect: dropshadow(three-pass-box, rgba(255, 250, 245, 0.94), 20, 0, 5, 5);
+    /*-fx-text-fill: linear-gradient(from 0% 0% to 100% 200%, repeat, blue 0%, red 70%);*/
+}
+.button {
+    -fx-background-color: transparent;
+    -fx-min-width: 100;
+    -fx-font-size: 50;
+    -fx-effect: dropshadow( gaussian , rgb(230, 230, 230) , 0,0,0,1 )
+    /*-fx-effect: dropshadow( gaussian , rgb(217, 217, 217) , 0,0,0,1 )*/
+    /*-fx-text-fill: linear-gradient(from 0% 0% to 100% 200%, repeat, blue 0%, red 70%);*/
+}
+
+
+.button:hover, #winners .label, #ranks .label {
+    -fx-text-fill: darkred;
+    -fx-effect: dropshadow(three-pass-box, rgba(182, 0, 16, 0.94), 20, 0, 5, 5);
+}
+.label {
+    -fx-font-size: 30;
+    -fx-background-color: transparent;
+    -fx-alignment: center;
+    -fx-text-fill: white;
+}
+#game, #winners,
+#playernames, #winnerscreen,
+#popup, #turn, #p1Turn, #p2Turn {
+    -fx-background-image: url("brick.jpg");
+    -fx-background-repeat: repeat;
+    -fx-background-position: center center;
+    -fx-padding: 10 10 10 10;
+}
+#popup{
+    -fx-background-image: url("warn.gif");
+    -fx-background-position: center center;
+}
+#mainmenu {
+    -fx-background-image: url("horse.jpg");
+    -fx-background-position: center center;
+}
+
+#popup .button {
+    -fx-font-size: 35;
+}
+
+#mainmenu .button {
+    -fx-font-size: 50;
+    -fx-font-weight: bold;
+
+}
+
+.button, #mainmenu .label, #playtitle, #leaders {
+    -fx-font-family: "UKIJKuU";
+    /* -fx-font-family: "fantasy"; */
+}
+
+#game .button {
+    -fx-font-size: 45;
+    -fx-font-weight: bold;
+}
+
+#title, #congrats, #leaders {
+    -fx-font-size: 70;
+}
+
+#warning {
+    -fx-text-fill: red;
+}
+
+#p1OnList {
+    /*-fx-text-fill: navy; */
+    -fx-text-fill: blue;
+}
+
+#p2OnList {
+    -fx-text-fill: #c90000
+
+}
