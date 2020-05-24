@@ -1,6 +1,9 @@
 package controller;
 
 import game.*;
+import game.sate.Player;
+import game.sate.Winner;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -11,17 +14,19 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
+import java.util.*;
+
+import static controller.GameUtils.currentPlayer;
 
 
 /**
  * A fő játékablak controller osztálya.
  */
-public class GameController {
+public class GameController  extends Field{
     /**
      * A logoláshoz szükséges logger.
      */
@@ -32,6 +37,7 @@ public class GameController {
      */
     @FXML
     GridPane board;
+
     /**
      * A játékablak grafikájának gyökéreleme, {@code BorderPane}.
      */
@@ -57,6 +63,10 @@ public class GameController {
      */
     private Board myBoard;
 
+    public static final String PLAYER_1 = "PLAYER_1";
+    public static final String PLAYER_2 = "PLAYER_2";
+    public static final Map<String, Player> players = new HashMap<>();
+
     /**
      * A {@code Controller} inicializáló függvénye.
      */
@@ -64,9 +74,7 @@ public class GameController {
     void initialize() {
         myBoard = new Board();
         drawBoard(myBoard, board);
-        p1Name.setText(Players.getPlayer("PLAYER1") + "\n (Horizontal)");
-        p2Name.setText(Players.getPlayer("PLAYER2") + "\n (Vertical)");
-        playerTurn.setText(Players.getPlayer("PLAYER1") + "'s turn");
+        playerTurn.setText(players.get(PLAYER_1) + "'s turn");
     }
 
     /**
@@ -97,44 +105,191 @@ public class GameController {
         new MainMenuController().exit();
     }
 
+    public Node getNodeByRowColumnIndex (final int row, final int column, GridPane gridPane) {
+        Node result = null;
+        ObservableList<Node> childrens = gridPane.getChildren();
+
+        for (Node node : childrens) {
+            Integer xNode = GridPane.getColumnIndex(node);
+            Integer yNode = GridPane.getRowIndex(node);
+
+            if(xNode != null && xNode == row && yNode != null && yNode == column) {
+                result = node;
+                break;
+            }
+        }
+
+        return result;
+    }
+
     /**
      * {@code FXML GridPane} eseménykezelő függvénye.
      * Ellenőrzi a lépés érvényességét, és megvizsgálja, van-e győztes az új állapotban.
      * @param mouseEvent Az elkapott egéresemény (kattintás)
      */
     @FXML
-    protected void gridClicked(MouseEvent mouseEvent) {
+    protected void gridClicked(MouseEvent mouseEvent)  {
         Node clickedNode = mouseEvent.getPickResult().getIntersectedNode();
         Integer colIndex = GridPane.getColumnIndex(clickedNode);
         Integer rowIndex = GridPane.getRowIndex(clickedNode);
+        Integer fieldID = Field.getFieldId();
         OccupiedPosition ofield = new OccupiedPosition();
+//        OccupiedPosition ofieldx = new OccupiedPosition();
+//        OccupiedPosition ofieldy = new OccupiedPosition();
+//        final int WIDTH = 10;
+//        final int HEIGHT = 10;
+
 
         if (!isThisAValidStep(colIndex, rowIndex)) {
+           return;
+
+        }
+
+        Player putting = null;
+        int otherX;
+        int otherY;
+        if(currentPlayer.equals(PLAYER_1)) {
+            putting = players.get(PLAYER_1);
+            otherX = players.get(PLAYER_2).getCurrentPosition()[0];
+            otherY = players.get(PLAYER_2).getCurrentPosition()[1];
+        } else {
+            putting = players.get(PLAYER_2);
+            otherX = players.get(PLAYER_1).getCurrentPosition()[0];
+            otherY = players.get(PLAYER_1).getCurrentPosition()[1];
+        }
+
+        int myX = putting.getCurrentPosition()[0];
+        int myY = putting.getCurrentPosition()[1];
+        if(!validMove(myX, myY, colIndex, rowIndex)) {
             return;
         }
 
+        if(myX != -1  && myY != -1) {
+            Node toHighlight = getNodeByRowColumnIndex(myX, myY, board);
+            ofield.setPosition(myX, myY);
+            ofield.setClickedNode(toHighlight);
+            GameUtils.changeColor(ofield, currentPlayer.equals(PLAYER_1) ? Color.PLAYER1 : Color.PLAYER2);
+
+            List<Move> validMoves = generatePossibleMoves(myX, myY);
+            for(Move move : validMoves) {
+                toHighlight = getNodeByRowColumnIndex(move.x, move.y, board);
+                ofield.setPosition(move.x, move.y);
+                ofield.setClickedNode(toHighlight);
+                GameUtils.changeColor(ofield, myBoard.getBoard().get(move.x).get(move.y).getColor());
+            }
+        } else {
+            List<Move> validMoves = generatePossibleMoves(colIndex, rowIndex);
+            for(Move move : validMoves) {
+                Node toHighlight = getNodeByRowColumnIndex(move.x, move.y, board);
+                ofield.setPosition(move.x, move.y);
+                ofield.setClickedNode(toHighlight);
+                GameUtils.changeColor(ofield, myBoard.getBoard().get(move.x).get(move.y).getColor());
+            }
+        }
+
         if (myBoard.getBoard().get(colIndex).get(rowIndex).getColor() == Color.NONE || myBoard.getBoard().get(colIndex).get(rowIndex).getColor() == Color.NONE2) {
-            logger.info("x: " + colIndex + " y: " + rowIndex);
+            logger.info("x: " + colIndex + " y: " + rowIndex + " fieldID: " + fieldID);
+            putting.setCurrentPosition(new int[]{colIndex,rowIndex});
             ofield.setPosition(colIndex, rowIndex);
             ofield.setClickedNode(clickedNode);
             GameUtils.writeTurn(playerTurn);
             String winner = GameUtils.changeColor(ofield, myBoard).toString();
-            if (!winner.equals("NONE") && (!winner.equals("NONE2"))) {
+
+            List<Move> validMoves = new ArrayList<>();
+            if(otherX != -1  && otherY != -1) {
+                Node toHighlight = getNodeByRowColumnIndex(otherX, otherY, board);
+                ofield.setPosition(otherX, otherY);
+                ofield.setClickedNode(toHighlight);
+                GameUtils.changeColor(ofield, Color.HIGHLIGHT);
+
+                validMoves = generatePossibleMoves(otherX, otherY);
+
+                for(Move move : validMoves) {
+                    toHighlight = getNodeByRowColumnIndex(move.x, move.y, board);
+                    Color current = myBoard.getBoard().get(move.x).get(move.y).getColor();
+                    if(current != Color.PLAYER1 && current != Color.PLAYER2) {
+                        ofield.setPosition(move.x, move.y);
+                        ofield.setClickedNode(toHighlight);
+                        GameUtils.changeColor(ofield, Color.HIGHLIGHT_VALID);
+                    }
+                }
+            }
+            if(validMoves.isEmpty() && otherX != -1  && otherY != -1) {
+              switchScene(Winner.TIE.toString());
+            } else if (!winner.equals("NONE") && (!winner.equals("NONE2"))) {
                 switchScene(winner);
             }
         }
-//        if (myBoard.getBoard().get(colIndex).get(rowIndex).getColor() == Color.NONE2) {
-//            logger.info("x: " + colIndex + " y: " + rowIndex);
-//            ofield.setPosition(colIndex, rowIndex);
-//            ofield.setClickedNode(clickedNode);
-//            GameUtils.writeTurn(playerTurn);
-//            String winner = GameUtils.changeColor(ofield, myBoard).toString();
-//            if (!winner.equals("NONE2")) {
-//                switchScene(winner);
-//            }
-//        }
-
     }
+
+    private boolean validMove(int currentX, int currentY, int selectedX, int slectedY) {
+        if(currentX == -1 && currentY == -1) {
+            return true;
+        }
+
+        List<Move> validMoves = generatePossibleMoves(currentX, currentY);
+
+        return validMoves.contains(new Move(selectedX, slectedY));
+    }
+
+    private static class Move {
+        private int x;
+        private int y;
+
+        public int getX() {
+            return x;
+        }
+
+        public void setX(int x) {
+            this.x = x;
+        }
+
+        public int getY() {
+            return y;
+        }
+
+        public void setY(int y) {
+            this.y = y;
+        }
+
+        public Move(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            if(this == other) {
+                return true;
+            }
+
+            if(!(other instanceof Move)) {
+                return false;
+            }
+
+            Move otherMove = (Move) other;
+            return Objects.equals(this.x, otherMove.getX()) && Objects.equals(this.y, otherMove.getY());
+        }
+    }
+
+    private List<Move> generatePossibleMoves(int x, int y) {
+        List<Move> result = new ArrayList<>();
+
+        final int width = Board.WIDTH;
+        final int height = Board.HEIGHT;
+
+        Move[] deltas = new Move[]{ new Move(-2, -1), new Move(-2, +1), new Move(+2, -1), new Move(+2, +1), new Move(-1, -2), new Move(-1, +2), new Move(+1, -2), new Move(+1, +2)};
+
+        for (Move delta : deltas) {
+            Move generated = new Move(x + delta.x, y + delta.y);
+            if(generated.getX() > -1 && generated.getY() > -1 && generated.getX() < width && generated.getY() < height) {
+                result.add(generated);
+            }
+        }
+
+        return result;
+    }
+
 
     /**
      * Ellenőrzi, hogy az elkapott kattintás valóban a {@code GridPane}
@@ -145,13 +300,8 @@ public class GameController {
      * @return {@code true} ha érvényes koordináta, {@code false} egyébként
      */
     private boolean isThisAValidStep(Integer colIndex, Integer rowIndex) {
-        try {
-            myBoard.getBoard().get(colIndex).get(rowIndex).getColor();
-
-        } catch (NullPointerException e) {
-            return false;
-        }
-        return true;
+        Color color = myBoard.getBoard().get(colIndex).get(rowIndex).getColor();
+        return !(color.equals(Color.PLAYER1) || color.equals(Color.PLAYER2));
     }
 
     /**
@@ -165,7 +315,7 @@ public class GameController {
 
         Scene scene = board.getScene();
         if(!winner.equals("TIE")){
-            UpdateLeaderBoard(Players.getPlayer(winner));
+            UpdateLeaderBoard(players.get(winner).getName());
         } else {
             JAXBUtil.readFromXML(logger);
         }
