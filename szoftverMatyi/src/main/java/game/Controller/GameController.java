@@ -1,7 +1,6 @@
 package controller;
 
 import game.*;
-import game.sate.Players;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -12,6 +11,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,7 +21,7 @@ import java.io.*;
 /**
  * A fő játékablak controller osztálya.
  */
-public class GameController  extends Field{
+public class GameController {
     /**
      * A logoláshoz szükséges logger.
      */
@@ -32,7 +32,6 @@ public class GameController  extends Field{
      */
     @FXML
     GridPane board;
-
     /**
      * A játékablak grafikájának gyökéreleme, {@code BorderPane}.
      */
@@ -68,7 +67,6 @@ public class GameController  extends Field{
         p1Name.setText(Players.getPlayer("PLAYER1") + "\n (Horizontal)");
         p2Name.setText(Players.getPlayer("PLAYER2") + "\n (Vertical)");
         playerTurn.setText(Players.getPlayer("PLAYER1") + "'s turn");
-
     }
 
     /**
@@ -98,65 +96,45 @@ public class GameController  extends Field{
     protected void exit() {
         new MainMenuController().exit();
     }
-//    private static boolean isValid(int x, int y) {
-//        return x >= 0 && x <= 7 && y >= 0 && y <= 7;
-//    }
+
     /**
      * {@code FXML GridPane} eseménykezelő függvénye.
      * Ellenőrzi a lépés érvényességét, és megvizsgálja, van-e győztes az új állapotban.
      * @param mouseEvent Az elkapott egéresemény (kattintás)
      */
     @FXML
-    protected void gridClicked(MouseEvent mouseEvent)  {
+    protected void gridClicked(MouseEvent mouseEvent) {
         Node clickedNode = mouseEvent.getPickResult().getIntersectedNode();
         Integer colIndex = GridPane.getColumnIndex(clickedNode);
         Integer rowIndex = GridPane.getRowIndex(clickedNode);
-        Integer fieldID = Field.getFieldId();
         OccupiedPosition ofield = new OccupiedPosition();
-//        OccupiedPosition ofieldx = new OccupiedPosition();
-//        OccupiedPosition ofieldy = new OccupiedPosition();
-//        final int WIDTH = 10;
-//        final int HEIGHT = 10;
-
 
         if (!isThisAValidStep(colIndex, rowIndex)) {
-           return;
-
+            return;
         }
 
         if (myBoard.getBoard().get(colIndex).get(rowIndex).getColor() == Color.NONE || myBoard.getBoard().get(colIndex).get(rowIndex).getColor() == Color.NONE2) {
-            logger.info("x: " + colIndex + " y: " + rowIndex + " fieldID: " + fieldID);
-//            int posx = colIndex;
-//            int posy = rowIndex;
-//            int cell;
-//            int x = cell.charAt(0) % 97,
-//                    y = +cell.charAt(1) - '0' - 1;
-//            int c = 0;
-//            for (int dx = -2; dx <= 2; dx++)
-//                for (int dy = -2; dy <= 2; dy++) {
-//                    if (Math.abs(dx * dy) == 2)
-//                        if (isValid(x + dx, y + dy))
-//                            c++;
-//                }
-//            return c;
-
-          //  if((colIndex + 2  && rowIndex+1 ){ //||(posx+1 && posy+2 %3));
-
-                ofield.setPosition(colIndex, rowIndex);
-                ofield.setClickedNode(clickedNode);
-                GameUtils.writeTurn(playerTurn);
-                String winner = GameUtils.changeColor(ofield, myBoard).toString();
-                if (!winner.equals("NONE") && (!winner.equals("NONE2"))) {
-                    switchScene(winner);
-                }
-//            if (!winner.equals("NONE")  (!winner.equals("NONE2"))) {
+            logger.info("x: " + colIndex + " y: " + rowIndex);
+            ofield.setPosition(colIndex, rowIndex);
+            ofield.setClickedNode(clickedNode);
+            GameUtils.writeTurn(playerTurn);
+            String winner = GameUtils.changeColor(ofield, myBoard).toString();
+            if (!winner.equals("NONE") && (!winner.equals("NONE2"))) {
+                switchScene(winner);
+            }
+        }
+//        if (myBoard.getBoard().get(colIndex).get(rowIndex).getColor() == Color.NONE2) {
+//            logger.info("x: " + colIndex + " y: " + rowIndex);
+//            ofield.setPosition(colIndex, rowIndex);
+//            ofield.setClickedNode(clickedNode);
+//            GameUtils.writeTurn(playerTurn);
+//            String winner = GameUtils.changeColor(ofield, myBoard).toString();
+//            if (!winner.equals("NONE2")) {
 //                switchScene(winner);
 //            }
-                }
-            }
+//        }
 
-    
-
+    }
 
     /**
      * Ellenőrzi, hogy az elkapott kattintás valóban a {@code GridPane}
