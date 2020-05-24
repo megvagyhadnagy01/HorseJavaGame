@@ -15,9 +15,10 @@ public class Board {
      * tároljuk, így a sor oszlopot sorként, a sort oszlopként kellene értelmezni.
      */
     private static ArrayList<ArrayList<Field>> board;
-   // static final int TILE_SIZE = 72;
-    static final int WIDTH = 10;
-    static final int HEIGHT = 10;
+
+    // static final int TILE_SIZE = 72;
+    public static final int WIDTH = 10;
+    public static final int HEIGHT = 10;
 //    public double getOldx() {
 //        return oldx;
 //    }

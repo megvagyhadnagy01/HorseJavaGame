@@ -12,7 +12,7 @@ package game;
  * {@code Player1Background}
  * {@code Player2Background}
  */
-public enum Color {
+public enum  Color {
     /**
      * Az egyes játékos által használt szín.
      */
@@ -28,12 +28,12 @@ public enum Color {
     /**
      * A szabad mezők színe2
      */
-   NONE2("BlACK");
-
+   NONE2("BlACK"),
+    HIGHLIGHT("YELLOW"), HIGHLIGHT_VALID("PURPLE");
     /**
      * A konstruktor működéséhez szükséges osztályváltozó.
      */
-    private String color;
+    private final String color;
 
     /**
      * Az enum konstruktora.

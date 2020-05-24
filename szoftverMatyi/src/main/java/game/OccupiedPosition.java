@@ -12,8 +12,8 @@ public class OccupiedPosition {
      *
      */
     private int[] position = {-1, -1};
-    private  int[] posx= {2, 1, -1, -2, -2, -1, 1, 2};
-    private int[]posy= {1, 2, 2, 1, -1, -2, -2, -1};
+//    private  int[] posx= {2, 1, -1, -2, -2, -1, 1, 2};
+//    private int[]posy= {1, 2, 2, 1, -1, -2, -2, -1};
     /**
      * Az elfoglalandó terület grafikus megjelenése.
      */
@@ -33,7 +33,7 @@ public class OccupiedPosition {
      * @return {@code true}, ha az elfoglalt helyek száma megegyezik a maximális szabad helyek számával,
      * {@code false} egyébként.
      */
-    public boolean isTheBoardFull(Board board) {
+    public boolean areThereNoMoves(Board board) {
         int boardSize = board.getBoard().size();
 //        boolean isTheBoardFull = getEventCounter() >= (boardSize * boardSize) / 2;
         boolean isTheBoardFull = getEventCounter() >= (boardSize * boardSize) /2;
