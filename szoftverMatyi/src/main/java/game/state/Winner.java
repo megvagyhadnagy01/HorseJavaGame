@@ -11,11 +11,11 @@ public enum Winner {
     /**
      * Az egyes játékos.
      */
-    PLAYER1,
+    PLAYER_1,
     /**
      * A kettes játékos.
      */
-    PLAYER2,
+    PLAYER_2,
     /**
      * Döntetlen.
      */
