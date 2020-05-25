@@ -2,6 +2,7 @@ package game.sate;
 
 /**
  * A játékosok nicknevét kezelő osztály.
+ * A játékos köröket tartalmazo osztály.
  */
 public class Player {
 

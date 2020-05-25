@@ -45,7 +45,7 @@ public class JAXBUtil {
     }
 
     /**
-     * Speciális függvény, a játék mappájából {@code user.home/ColorWar} olvassa a leaderboard.xml-t.
+     * Speciális függvény, a játék mappájából {@code user.home/HorseGame} olvassa a leaderboard.xml-t.
      *
      * @param logger a loghoz szükséges logger
      * @return a beolvasott objektumot adja vissza
@@ -65,7 +65,7 @@ public class JAXBUtil {
     }
 
     /**
-     * Speciális függvény, a játék mappájába {@code user.home/ColorWar} írja felül a leaderboard.xml-t,
+     * Speciális függvény, a játék mappájába {@code user.home/HorseGamer} írja felül a leaderboard.xml-t,
      * illetve ha nincs ilyen állomány, akkor létrehozza.
      *
      * @param leaderBoard a kiírandó objektum

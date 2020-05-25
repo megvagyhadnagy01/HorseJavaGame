@@ -77,7 +77,8 @@ public class GameUtils {
 
     /**
      * Megvizsgálja, hogy az adott {@code Field}-eket tartalmazó lista
-     * elemei egyszínűek-e.
+     * elemei egyszínűek-e soronként a Blue játékosnak
+     * illetve oszloponként a Red játékosnak.
      *
      * @return Ha mind egyszínű igaz, egyébként hamis.
      */
