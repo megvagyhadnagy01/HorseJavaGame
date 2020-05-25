@@ -1,5 +1,7 @@
 package game.sate;
 
+import java.util.ArrayList;
+
 /**
  * A játékosok nicknevét kezelő osztály.
  */

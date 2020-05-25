@@ -1,5 +1,5 @@
 @font-face {
-    /*   src: url("SlimPlay.ttf");*/
+ /*   src: url("SlimPlay.ttf");*/
     src: url("UKIJKuU.ttf");
 }
 
@@ -30,7 +30,7 @@
     -fx-alignment: center;
     -fx-text-fill: white;
 }
-#game, #winners,
+ #game, #winners,
 #playernames, #winnerscreen,
 #popup, #turn, #p1Turn, #p2Turn {
     -fx-background-image: url("brick.jpg");
@@ -59,7 +59,7 @@
 
 .button, #mainmenu .label, #playtitle, #leaders {
     -fx-font-family: "UKIJKuU";
-    /* -fx-font-family: "fantasy"; */
+   /* -fx-font-family: "fantasy"; */
 }
 
 #game .button {
