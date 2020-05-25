@@ -124,7 +124,8 @@ public class GameController  extends Field{
 
     /**
      * {@code FXML GridPane} eseménykezelő függvénye.
-     * Ellenőrzi a lépés érvényességét, és megvizsgálja, van-e győztes az új állapotban.
+     * Ellenőrzi a lépés érvényességét lo lépésnek megfelelöen illetve Higlitolja a lépéseketjátékosonként mint jelenlegi állapot és feldobálja a validált lépéseket játékosonként,
+     * és megvizsgálja, van-e győztes az új állapotban.
      * @param mouseEvent Az elkapott egéresemény (kattintás)
      */
     @FXML
@@ -138,13 +139,17 @@ public class GameController  extends Field{
 //        OccupiedPosition ofieldy = new OccupiedPosition();
 //        final int WIDTH = 10;
 //        final int HEIGHT = 10;
-
+        /**
+         * Nézi a nem validált lépéseket.
+         */
 
         if (!isThisAValidStep(colIndex, rowIndex)) {
-           return;
+            return;
 
         }
-
+        /**
+         * Beállitja a x és y kordinátákat playerekre közbe nézi ki lépet.
+         */
         Player putting = null;
         int otherX;
         int otherY;
@@ -163,7 +168,9 @@ public class GameController  extends Field{
         if(!validMove(myX, myY, colIndex, rowIndex)) {
             return;
         }
-
+        /**
+         * A a board fxml idját  valo Player 1 és Player 2 lépéset alakitja.
+         */
         if(myX != -1  && myY != -1) {
             Node toHighlight = getNodeByRowColumnIndex(myX, myY, board);
             ofield.setPosition(myX, myY);
@@ -186,7 +193,9 @@ public class GameController  extends Field{
                 GameUtils.changeColor(ofield, myBoard.getBoard().get(move.x).get(move.y).getColor());
             }
         }
-
+        /**
+         * Megnézi ,hogy az adot lépéseket ki és ,hogy NONE vagy NONE2 értekzetek-e.
+         */
         if (myBoard.getBoard().get(colIndex).get(rowIndex).getColor() == Color.NONE || myBoard.getBoard().get(colIndex).get(rowIndex).getColor() == Color.NONE2) {
             logger.info("x: " + colIndex + " y: " + rowIndex + " fieldID: " + fieldID);
             putting.setCurrentPosition(new int[]{colIndex,rowIndex});
@@ -194,7 +203,9 @@ public class GameController  extends Field{
             ofield.setClickedNode(clickedNode);
             GameUtils.writeTurn(playerTurn);
             String winner = GameUtils.changeColor(ofield, myBoard).toString();
-
+            /**
+             * Higlightol-ja az elözö lépést a játékosoknak.
+             */
             List<Move> validMoves = new ArrayList<>();
             if(otherX != -1  && otherY != -1) {
                 Node toHighlight = getNodeByRowColumnIndex(otherX, otherY, board);
@@ -203,7 +214,9 @@ public class GameController  extends Field{
                 GameUtils.changeColor(ofield, Color.HIGHLIGHT);
 
                 validMoves = generatePossibleMoves(otherX, otherY);
-
+                /**
+                 * Feldobja a játékosoknak az összes lépés lehetöségét mint HiglightValid
+                 */
                 for(Move move : validMoves) {
                     toHighlight = getNodeByRowColumnIndex(move.x, move.y, board);
                     Color current = myBoard.getBoard().get(move.x).get(move.y).getColor();
@@ -215,13 +228,21 @@ public class GameController  extends Field{
                 }
             }
             if(validMoves.isEmpty() && otherX != -1  && otherY != -1) {
-              switchScene(Winner.TIE.toString());
+                switchScene(Winner.TIE.toString());
             } else if (!winner.equals("NONE") && (!winner.equals("NONE2"))) {
                 switchScene(winner);
             }
         }
     }
 
+    /**
+     *
+     * @param currentX a lépet x kordináta
+     * @param currentY a lépet y kordináta
+     * @param selectedX a kiválasztot x kordináta
+     * @param slectedY a kiválasztot y kordináta
+     * @return ha lépés nem történt meg igazat ad vissza ha pedig emg akkor a kordnitátát
+     */
     private boolean validMove(int currentX, int currentY, int selectedX, int slectedY) {
         if(currentX == -1 && currentY == -1) {
             return true;
@@ -232,6 +253,9 @@ public class GameController  extends Field{
         return validMoves.contains(new Move(selectedX, slectedY));
     }
 
+    /**
+     * Elmentjük a lépés x és y kordinátáját.
+     */
     private static class Move {
         private int x;
         private int y;
@@ -257,6 +281,11 @@ public class GameController  extends Field{
             this.y = y;
         }
 
+        /**
+         *
+         * @param other
+         * @return
+         */
         @Override
         public boolean equals(Object other) {
             if(this == other) {
@@ -272,6 +301,12 @@ public class GameController  extends Field{
         }
     }
 
+    /**
+     *
+     * @param x le generáéjuk az összes x kordnitát amit léphet a játkosok
+     * @param y legeneráljuk az összes y kordinátát amit léphetnek a játékosok
+     * @return Listábáa szedjük a kordinátátkat
+     */
     private List<Move> generatePossibleMoves(int x, int y) {
         List<Move> result = new ArrayList<>();
 
