@@ -1,7 +1,7 @@
 package controller;
 
 import game.*;
-import game.sate.Winner;
+import game.state.Winner;
 import javafx.scene.layout.StackPane;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -48,7 +48,7 @@ public class GameUtilsTest {
         Field field = new Field();
         field.setColor(Color.PLAYER1);
         fields.add(field);
-        //assertFalse(GameUtils.isThereWinner(fields));
+       // assertFalse(GameUtils.isThereWinner(fields));
     }
 
 //    @Test

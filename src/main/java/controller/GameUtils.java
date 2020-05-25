@@ -2,7 +2,7 @@ package controller;
 
 
 import game.*;
-import game.sate.Winner;
+import game.state.Winner;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import org.slf4j.Logger;

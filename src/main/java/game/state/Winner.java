@@ -1,4 +1,4 @@
-package game.sate;
+package game.state;
 
 /**
  * A lehetséges győztes állapotokat tartalmazza.

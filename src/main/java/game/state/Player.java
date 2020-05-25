@@ -1,6 +1,4 @@
-package game.sate;
-
-import java.util.ArrayList;
+package game.state;
 
 /**
  * A játékosok nicknevét kezelő osztály.

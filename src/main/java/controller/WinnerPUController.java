@@ -1,7 +1,6 @@
 package controller;
 
 import game.LeaderBoard;
-import game.sate.Player;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

@@ -1,8 +1,8 @@
 package controller;
 
 import game.*;
-import game.sate.Player;
-import game.sate.Winner;
+import game.state.Player;
+import game.state.Winner;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -281,10 +281,11 @@ public class GameController  extends Field{
             this.y = y;
         }
 
+
         /**
          *
-         * @param other
-         * @return
+         * @param other értéke egyenlö Ojectel akkor igaz ellenkezö esetben ha nem a Move származik hamis.
+         * @return megkapjuk az other x és y kordinátáját.
          */
         @Override
         public boolean equals(Object other) {
