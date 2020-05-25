@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/HorseJavaGame.iml" filepath="$PROJECT_DIR$/.idea/HorseJavaGame.iml" />
-      <module fileurl="file://$PROJECT_DIR$/szoftverMatyi/swe-project.iml" filepath="$PROJECT_DIR$/szoftverMatyi/swe-project.iml" />
+      <module fileurl="file://$PROJECT_DIR$/swe-project.iml" filepath="$PROJECT_DIR$/swe-project.iml" />
     </modules>
   </component>
 </project>
