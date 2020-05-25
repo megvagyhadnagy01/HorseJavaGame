@@ -52,8 +52,7 @@ public class WinnerPUController {
      *
      * Győztes esetén a névre szóló gratulációra állítja a szöveget,
      * döntetlen esetén pedig az ahhoz illő szöveggel.
-     * Döntetlen esemény, ha az összes színezhető mező elfogyott
-     * vagy nincs több lehetséges lépés.
+     * Döntetlen esemény, ha az összes színezhető mező elfogyott.
      * @param winner A győztes játékos nickneve, döntetlen esetén az értéke
      *               "TIE".
      */

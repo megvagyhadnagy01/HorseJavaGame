@@ -12,7 +12,8 @@ public class OccupiedPosition {
      *
      */
     private int[] position = {-1, -1};
-
+//    private  int[] posx= {2, 1, -1, -2, -2, -1, 1, 2};
+//    private int[]posy= {1, 2, 2, 1, -1, -2, -2, -1};
     /**
      * Az elfoglalandó terület grafikus megjelenése.
      */

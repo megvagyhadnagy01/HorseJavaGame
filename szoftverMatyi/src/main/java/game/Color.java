@@ -30,11 +30,11 @@ public enum  Color {
      */
    NONE2("BlACK"),
     /**
-     * Az aktuális mező szine
+     * Az aktuális játékos mezője
      */
     HIGHLIGHT("YELLOW"),
     /**
-     * Az összes lépes lehetöségének szine
+     * Az aktuális játékos összes lehetösége
      */
     HIGHLIGHT_VALID("PURPLE");
     /**

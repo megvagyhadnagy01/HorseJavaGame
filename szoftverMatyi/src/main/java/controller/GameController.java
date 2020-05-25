@@ -62,9 +62,7 @@ public class GameController  extends Field{
      * A játéktábla állását tároló {@link Board} objektum.
      */
     private Board myBoard;
-    /**
-    A Tábla játékosainak modszere amelyben beálitjuk Player1 és Player2 töt.
-     */
+
     public static final String PLAYER_1 = "PLAYER_1";
     public static final String PLAYER_2 = "PLAYER_2";
     public static final Map<String, Player> players = new HashMap<>();
@@ -77,7 +75,6 @@ public class GameController  extends Field{
         myBoard = new Board();
         drawBoard(myBoard, board);
         playerTurn.setText(players.get(PLAYER_1) + "'s turn");
-        playerTurn.setText(players.get(PLAYER_2)+"'s turn");
     }
 
     /**
@@ -127,9 +124,7 @@ public class GameController  extends Field{
 
     /**
      * {@code FXML GridPane} eseménykezelő függvénye.
-     * Ellenőrzi a lépés érvényességét ló lépésnek megfeleöen illetve
-     * megjegyzi az elözö lépést Higlitel és feldobja a Játékos következö összes lépésének a lehetöségét
-     * , és megvizsgálja, van-e győztes az új állapotban.
+     * Ellenőrzi a lépés érvényességét, és megvizsgálja, van-e győztes az új állapotban.
      * @param mouseEvent Az elkapott egéresemény (kattintás)
      */
     @FXML
@@ -149,9 +144,7 @@ public class GameController  extends Field{
            return;
 
         }
-        /**
-         *
-         */
+
         Player putting = null;
         int otherX;
         int otherY;
@@ -193,9 +186,7 @@ public class GameController  extends Field{
                 GameUtils.changeColor(ofield, myBoard.getBoard().get(move.x).get(move.y).getColor());
             }
         }
-        /**
-         *
-         */
+
         if (myBoard.getBoard().get(colIndex).get(rowIndex).getColor() == Color.NONE || myBoard.getBoard().get(colIndex).get(rowIndex).getColor() == Color.NONE2) {
             logger.info("x: " + colIndex + " y: " + rowIndex + " fieldID: " + fieldID);
             putting.setCurrentPosition(new int[]{colIndex,rowIndex});
@@ -241,10 +232,6 @@ public class GameController  extends Field{
         return validMoves.contains(new Move(selectedX, slectedY));
     }
 
-    /**
-     *
-     */
-
     private static class Move {
         private int x;
         private int y;
@@ -270,12 +257,6 @@ public class GameController  extends Field{
             this.y = y;
         }
 
-        /**
-         *
-         * @param other
-         * @return
-         */
-
         @Override
         public boolean equals(Object other) {
             if(this == other) {
@@ -291,12 +272,6 @@ public class GameController  extends Field{
         }
     }
 
-    /**
-     *
-     * @param x
-     * @param y
-     * @return
-     */
     private List<Move> generatePossibleMoves(int x, int y) {
         List<Move> result = new ArrayList<>();
 

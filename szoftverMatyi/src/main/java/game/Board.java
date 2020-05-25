@@ -19,7 +19,13 @@ public class Board {
     // static final int TILE_SIZE = 72;
     public static final int WIDTH = 10;
     public static final int HEIGHT = 10;
-
+//    public double getOldx() {
+//        return oldx;
+//    }
+//
+//    public double getOldy() {
+//        return oldy;
+//    }
 
 
     /**

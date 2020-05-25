@@ -45,7 +45,6 @@ public class PlayerNController {
 
     /**
      * A nevek rögzítését kezelő függvény.
-     *A a játékosok uj üres pozicioját álitja be.
      *
      * Üres {@code Textfield}-ek esetén aktiválja a {@code warning Label}-t
      * "Type both name!" felirattal (#warning .css-ből), egyébként
@@ -59,7 +58,6 @@ public class PlayerNController {
             players.put(PLAYER_1, new Player(player1.getText(), new int[]{-1, -1}));
             players.put(PLAYER_2, new Player(player2.getText(), new int[]{-1, -1}));
             GameUtils.currentPlayer = PLAYER_1;
-            //GameUtils.currentPlayer = PLAYER_2;
             Scene scene = warning.getScene();
             Parent root = null;
             try {

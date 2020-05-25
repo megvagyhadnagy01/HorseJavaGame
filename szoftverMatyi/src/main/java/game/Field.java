@@ -8,18 +8,17 @@ package game;
 public class Field {
     /**
      * {@link Color} típusú tulajdonsága a mezőnek.
-     * {@link Board} tábla fieldjeinek id-ja.
      */
     private Color color;
 
-//    public static int getFieldId() {
-//        return fieldId;
-//    }
+    public static int getFieldId() {
+        return fieldId;
+    }
 
     private static int fieldId = 0;
 
     /**
-     * Az alapértelmezett szín fehér ({@link Color}{@code .NONE és NONE2}).
+     * Az alapértelmezett szín fehér ({@link Color}{@code .NONE}).
      */
     public Field() {
         this.color = Color.NONE;
@@ -30,7 +29,6 @@ public class Field {
 
     /**
      * Mező színének setter függvénye.
-     *
      *
      * @param color A beállítandó {@link Color}
      */
@@ -43,17 +41,14 @@ public class Field {
 
     /**
      * A mező színének getter függvénye.
-     *A filedIdjának getter fügvénye.
-     * @return  A mező pillanatnyi {@link Color} értéke
-     * @return A mező pillanatnyi {@link Board} értéke
+     *
+     * @return A mező pillanatnyi {@link Color} értéke
      */
     public Color getColor() {
         return color;
     }
 
-    public static int getFieldId() {
-        return fieldId;
-    }
+
     /**
      * A mező {@link String} megjelenése.
      *
