@@ -29,7 +29,14 @@ public enum  Color {
      * A szabad mezők színe2
      */
    NONE2("BlACK"),
-    HIGHLIGHT("YELLOW"), HIGHLIGHT_VALID("PURPLE");
+    /**
+     * Az aktuális mező szine
+     */
+    HIGHLIGHT("YELLOW"),
+    /**
+     * Az összes lépes lehetöségének szine
+     */
+    HIGHLIGHT_VALID("PURPLE");
     /**
      * A konstruktor működéséhez szükséges osztályváltozó.
      */

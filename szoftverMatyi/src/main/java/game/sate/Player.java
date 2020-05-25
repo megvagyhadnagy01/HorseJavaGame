@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 /**
  * A játékosok nicknevét kezelő osztály.
+ * A játékos köröket tartalmazo osztály.
  */
 public class Player {
 
